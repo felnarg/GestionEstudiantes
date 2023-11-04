@@ -9,5 +9,5 @@ public class Course
     public string Name {get;set;}
 
     [JsonIgnore]
-    public virtual ICollection<Student> Students {get;set;}
+    public virtual  Students {get;set;}
 }
