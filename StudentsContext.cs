@@ -28,7 +28,7 @@ public class StudentsContext: DbContext
 
             student.HasKey(p=> p.StudentId);
 
-            student.HasOne(p=> p.Course).WithMany(p=> p.Student).HasForeignKey(p=> p.CourseId).OnDelete(DeleteBehavior.Cascade);
+            student.HasOne(p=> p.Course).WithMany(p=> p.Student).HasForeignKey(p=> p.CourseId).OnDelete(DeleteBehavior.Cascade).IsRequired();
 
             student.Property(p=> p.Name).IsRequired().HasMaxLength(50);
 
