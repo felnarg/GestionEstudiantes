@@ -21,6 +21,7 @@ namespace Gestion_Estudiantes.Services
 
         public async Task Save(Student student)
         {
+            student.StudentId = Guid.NewGuid();
             context.Add(student);
             await context.SaveChangesAsync();
         }

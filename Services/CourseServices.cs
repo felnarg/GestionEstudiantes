@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+﻿using Microsoft.AspNetCore.Mvc;
 using webapi;
 using webapi.Models;
 
@@ -14,17 +12,18 @@ namespace Gestion_Estudiantes.Services
         {
             context = dbcontext;
         }
+        
         public IEnumerable<Course> Get()
         {
             return context.Courses;
         }
-
+        
         public async Task Save(Course course)
         {
+            course.CourseId = Guid.NewGuid();
             context.Add(course);
             await context.SaveChangesAsync();
         }
-
         public async Task Update(Guid id, Course course)
         {
             var actualCourse = context.Courses.Find(id);
@@ -37,6 +36,7 @@ namespace Gestion_Estudiantes.Services
                 
             await context.SaveChangesAsync();
         }
+        
         public async Task Delete(Guid id)
         {
             var actualCourse = context.Courses.Find(id);
