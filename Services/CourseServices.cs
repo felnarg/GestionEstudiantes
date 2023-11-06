@@ -6,7 +6,7 @@ using webapi.Models;
 
 namespace Gestion_Estudiantes.Services
 {
-    public class CourseServices : ICourseService
+    public class CourseServices : ICourseServices
     {
         StudentsContext context;
 
@@ -50,7 +50,7 @@ namespace Gestion_Estudiantes.Services
         }
     }
 
-    public interface ICourseService
+    public interface ICourseServices
     {
         public IEnumerable<Course> Get();
         public Task Save(Course course);
