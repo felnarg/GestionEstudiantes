@@ -1,3 +1,4 @@
+using Gestion_Estudiantes.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using webapi;
@@ -11,6 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSqlServer<StudentsContext>(builder.Configuration.GetConnectionString("dbstudent"));
+builder.Services.AddScoped<ICourseServices, CourseServices>();
+builder.Services.AddScoped<IStudentServices, StudentServices>();
 
 var app = builder.Build();
 
