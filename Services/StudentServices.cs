@@ -41,39 +41,23 @@ namespace Gestion_Estudiantes.Services
 
         public IEnumerable<Student> GetStudentAgeContiditions(string condition)
         {
-            string input = condition.ToString();
-            string[] parts = input.Split("to",StringSplitOptions.None);
+            string[] parts = condition.Split("to",StringSplitOptions.None);
 
             if(parts.Length==2)
             {
                 string keyword = parts[0].ToString();
                 int.TryParse(parts[1], out int number);
 
-                if (keyword == "igual")
-                {
-                    var filter = context.Students.Where(p => p.Age == number);
-                    return filter.ToList();
-                }
-                if (keyword == "mayor")
-                {
-                    var filter = context.Students.Where(p => p.Age > number);
-                    return filter.ToList();
-                }
-                if (keyword == "menor")
-                {
-                    var filter = context.Students.Where(p => p.Age < number);
-                    return filter.ToList();
-                }
-                if (keyword == "mayoroigual")
-                {
-                    var filter = context.Students.Where(p => p.Age >= number);
-                    return filter.ToList();
-                }
-                if (keyword == "menoroigual")
-                {
-                    var filter = context.Students.Where(p => p.Age <= number);
-                    return filter.ToList();
-                }
+                if (keyword == "igual"){var filter = context.Students.Where(p => p.Age == number);
+                    return filter.ToList();}
+                if (keyword == "mayor"){var filter = context.Students.Where(p => p.Age > number);
+                    return filter.ToList();}
+                if (keyword == "menor"){var filter = context.Students.Where(p => p.Age < number);
+                    return filter.ToList();}
+                if (keyword == "mayoroigual"){var filter = context.Students.Where(p => p.Age >= number);
+                    return filter.ToList();}
+                if (keyword == "menoroigual"){var filter = context.Students.Where(p => p.Age <= number);
+                    return filter.ToList();}
             }
             return Enumerable.Empty<Student>();
         }
@@ -81,10 +65,8 @@ namespace Gestion_Estudiantes.Services
         public async Task Save(Student student)
         {
             //student.StudentId = Guid.NewGuid();
-            //context.Add(student);
             context.Students.Add(student);
             context.SaveChanges();
-            //await context.SaveChangesAsync();
         }
 
         public async Task Update(Guid id, Student student)
@@ -97,9 +79,8 @@ namespace Gestion_Estudiantes.Services
                 actualStudent.Age = student.Age;
                 context.Update(actualStudent);
                 context.SaveChanges();
-                //await context.SaveChangesAsync();
             }
-            await context.SaveChangesAsync();
+            context.SaveChanges();
         }
         public async Task Delete(Guid id)
         {
@@ -108,7 +89,6 @@ namespace Gestion_Estudiantes.Services
             {
                 context.Remove(actualStudent);
                 context.SaveChanges();
-                //await context.SaveChangesAsync();
             }            
         }
     }
