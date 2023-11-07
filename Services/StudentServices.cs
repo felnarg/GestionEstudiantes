@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using System.Diagnostics.Eventing.Reader;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using webapi;
@@ -33,7 +34,48 @@ namespace Gestion_Estudiantes.Services
                 var filter = context.Students.Where(p => p.CourseId == id);
                 return filter.ToList();
             }
-            return context.Students; //revisar como retornar un badrequest
+            //return NotFound();
+            return Enumerable.Empty<Student>();
+            //return context.Students; //revisar como retornar un badrequest
+        }
+
+        public IEnumerable<Student> GetStudentAgeContiditions(string condition)
+        {
+            string input = condition.ToString();
+            string[] parts = input.Split("to",StringSplitOptions.None);
+
+            if(parts.Length==2)
+            {
+                string keyword = parts[0].ToString();
+                int.TryParse(parts[1], out int number);
+
+                if (keyword == "igual")
+                {
+                    var filter = context.Students.Where(p => p.Age == number);
+                    return filter.ToList();
+                }
+                if (keyword == "mayor")
+                {
+                    var filter = context.Students.Where(p => p.Age > number);
+                    return filter.ToList();
+                }
+                if (keyword == "menor")
+                {
+                    var filter = context.Students.Where(p => p.Age < number);
+                    return filter.ToList();
+                }
+                if (keyword == "mayoroigual")
+                {
+                    var filter = context.Students.Where(p => p.Age >= number);
+                    return filter.ToList();
+                }
+                if (keyword == "menoroigual")
+                {
+                    var filter = context.Students.Where(p => p.Age <= number);
+                    return filter.ToList();
+                }
+            }
+            return Enumerable.Empty<Student>();
         }
 
         public async Task Save(Student student)
@@ -42,7 +84,7 @@ namespace Gestion_Estudiantes.Services
             //context.Add(student);
             context.Students.Add(student);
             context.SaveChanges();
-            await context.SaveChangesAsync();
+            //await context.SaveChangesAsync();
         }
 
         public async Task Update(Guid id, Student student)
@@ -55,7 +97,7 @@ namespace Gestion_Estudiantes.Services
                 actualStudent.Age = student.Age;
                 context.Update(actualStudent);
                 context.SaveChanges();
-                await context.SaveChangesAsync();
+                //await context.SaveChangesAsync();
             }
             await context.SaveChangesAsync();
         }
@@ -66,7 +108,7 @@ namespace Gestion_Estudiantes.Services
             {
                 context.Remove(actualStudent);
                 context.SaveChanges();
-                await context.SaveChangesAsync();
+                //await context.SaveChangesAsync();
             }            
         }
     }
@@ -75,6 +117,7 @@ namespace Gestion_Estudiantes.Services
     {
         public IEnumerable<Student> Get();
         public IEnumerable<Student> StudentIdFilter(Guid id);
+        public IEnumerable<Student> GetStudentAgeContiditions(string condition);
         public Task Save(Student student);
         public Task Update(Guid id, Student student);
         public Task Delete(Guid id);

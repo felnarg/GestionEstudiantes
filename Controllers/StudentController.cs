@@ -24,6 +24,11 @@ namespace Gestion_Estudiantes.Controllers
         {
             return Ok(_studentService.StudentIdFilter(id));
         }
+        [HttpGet("studentage/{condition}")]
+        public IActionResult GetStudentAgeContiditions(string condition)
+        {
+            return Ok(_studentService.GetStudentAgeContiditions(condition));
+        }
 
         [HttpPost]
         public IActionResult Post([FromBody] Student student) 

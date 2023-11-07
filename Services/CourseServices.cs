@@ -24,7 +24,7 @@ namespace Gestion_Estudiantes.Services
             //course.CourseId = Guid.NewGuid();
             context.Add(course);
             context.SaveChanges();
-            await context.SaveChangesAsync();
+            //await context.SaveChangesAsync();
         }
         public async Task Update(Guid id, Course course)
         {
@@ -35,7 +35,7 @@ namespace Gestion_Estudiantes.Services
                 //context.Attach(actualCourse);
                 context.Update(actualCourse);
                 context.SaveChanges();
-                await context.SaveChangesAsync();
+                //await context.SaveChangesAsync();
             }            
         }
         
@@ -46,7 +46,7 @@ namespace Gestion_Estudiantes.Services
             {   
                 context.Remove(actualCourse);
                 context.SaveChanges();
-                await context.SaveChangesAsync();
+                //await context.SaveChangesAsync();
             }
         }
     }
