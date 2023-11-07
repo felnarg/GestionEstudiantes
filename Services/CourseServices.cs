@@ -20,7 +20,7 @@ namespace Gestion_Estudiantes.Services
         
         public async Task Save(Course course)
         {
-            course.CourseId = Guid.NewGuid();
+            //course.CourseId = Guid.NewGuid();
             context.Add(course);
             await context.SaveChangesAsync();
         }
@@ -45,8 +45,6 @@ namespace Gestion_Estudiantes.Services
                 context.Remove(actualCourse);
                 await context.SaveChangesAsync();
             }
-
-            await context.SaveChangesAsync();
         }
     }
 
