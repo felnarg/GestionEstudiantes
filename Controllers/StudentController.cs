@@ -19,6 +19,11 @@ namespace Gestion_Estudiantes.Controllers
         {
             return Ok(_studentService.Get());
         }
+        [HttpGet("studentid/{id}")]
+        public IActionResult GetStudentIdFilter(Guid id)
+        {
+            return Ok(_studentService.StudentIdFilter(id));
+        }
 
         [HttpPost]
         public IActionResult Post([FromBody] Student student) 
