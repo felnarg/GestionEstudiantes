@@ -26,9 +26,14 @@ namespace Gestion_Estudiantes.Controllers
             _courseServices.Save(course);
             return Ok();
         }
+        
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id,[FromBody] Course course)
+        public IActionResult Put([FromRoute] Guid id,[FromBody] Course course)
         {
+            if (course.Name == null)
+            {
+                return BadRequest("La propiedad nombre no puede ser nula");
+            }
             _courseServices.Update(id, course);
             return Ok();
         }

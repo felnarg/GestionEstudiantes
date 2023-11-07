@@ -8,7 +8,7 @@ namespace Gestion_Estudiantes.Services
 {
     public class StudentServices : IStudentServices
     {
-        StudentsContext context;
+        protected readonly StudentsContext context;
 
         public StudentServices(StudentsContext dbcontext)
         {
@@ -21,8 +21,10 @@ namespace Gestion_Estudiantes.Services
 
         public async Task Save(Student student)
         {
-            student.StudentId = Guid.NewGuid();
-            context.Add(student);
+            //student.StudentId = Guid.NewGuid();
+            //context.Add(student);
+            context.Students.Add(student);
+            context.SaveChanges();
             await context.SaveChangesAsync();
         }
 
@@ -31,7 +33,11 @@ namespace Gestion_Estudiantes.Services
             var actualStudent = context.Students.Find(id);
             if (actualStudent != null)
             {
+                actualStudent.CourseId = student.CourseId;
                 actualStudent.Name = student.Name;
+                actualStudent.Age = student.Age;
+                context.Update(actualStudent);
+                context.SaveChanges();
                 await context.SaveChangesAsync();
             }
             await context.SaveChangesAsync();
@@ -42,10 +48,9 @@ namespace Gestion_Estudiantes.Services
             if (actualStudent != null)
             {
                 context.Remove(actualStudent);
+                context.SaveChanges();
                 await context.SaveChangesAsync();
-            }
-
-            await context.SaveChangesAsync();
+            }            
         }
     }
 

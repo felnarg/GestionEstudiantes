@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using webapi;
 using webapi.Models;
 
@@ -6,7 +7,7 @@ namespace Gestion_Estudiantes.Services
 {
     public class CourseServices : ICourseServices
     {
-        StudentsContext context;
+        protected readonly StudentsContext context;
 
         public CourseServices(StudentsContext dbcontext)
         {
@@ -22,6 +23,7 @@ namespace Gestion_Estudiantes.Services
         {
             //course.CourseId = Guid.NewGuid();
             context.Add(course);
+            context.SaveChanges();
             await context.SaveChangesAsync();
         }
         public async Task Update(Guid id, Course course)
@@ -30,19 +32,20 @@ namespace Gestion_Estudiantes.Services
             if (actualCourse!=null)
             {
                 actualCourse.Name = course.Name;
-                
+                //context.Attach(actualCourse);
+                context.Update(actualCourse);
+                context.SaveChanges();
                 await context.SaveChangesAsync();
-            }
-                
-            await context.SaveChangesAsync();
+            }            
         }
         
         public async Task Delete(Guid id)
         {
             var actualCourse = context.Courses.Find(id);
             if (actualCourse != null)
-            {
+            {   
                 context.Remove(actualCourse);
+                context.SaveChanges();
                 await context.SaveChangesAsync();
             }
         }
