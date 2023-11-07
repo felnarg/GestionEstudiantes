@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using System.Diagnostics.Eventing.Reader;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using webapi;
@@ -8,7 +9,7 @@ namespace Gestion_Estudiantes.Services
 {
     public class StudentServices : IStudentServices
     {
-        StudentsContext context;
+        protected readonly StudentsContext context;
 
         public StudentServices(StudentsContext dbcontext)
         {
@@ -19,10 +20,71 @@ namespace Gestion_Estudiantes.Services
             return context.Students;
         }
 
+        public IEnumerable<Student> StudentIdFilter(Guid id)
+        {
+            var idStudent = context.Students.Find(id);
+            var idCourse = context.Courses.Find(id);
+            if (idStudent != null && idCourse==null)
+            {
+                var filter = context.Students.Where(p => p.StudentId == id);
+                return filter.ToList();
+            }
+            if (idCourse != null && idStudent == null)
+            {
+                var filter = context.Students.Where(p => p.CourseId == id);
+                return filter.ToList();
+            }
+            //return NotFound();
+            return Enumerable.Empty<Student>();
+            //return context.Students; //revisar como retornar un badrequest
+        }
+
+        public IEnumerable<Student> GetStudentAgeContiditions(string condition)
+        {
+            string input = condition.ToString();
+            string[] parts = input.Split("to",StringSplitOptions.None);
+
+            if(parts.Length==2)
+            {
+                string keyword = parts[0].ToString();
+                int.TryParse(parts[1], out int number);
+
+                if (keyword == "igual")
+                {
+                    var filter = context.Students.Where(p => p.Age == number);
+                    return filter.ToList();
+                }
+                if (keyword == "mayor")
+                {
+                    var filter = context.Students.Where(p => p.Age > number);
+                    return filter.ToList();
+                }
+                if (keyword == "menor")
+                {
+                    var filter = context.Students.Where(p => p.Age < number);
+                    return filter.ToList();
+                }
+                if (keyword == "mayoroigual")
+                {
+                    var filter = context.Students.Where(p => p.Age >= number);
+                    return filter.ToList();
+                }
+                if (keyword == "menoroigual")
+                {
+                    var filter = context.Students.Where(p => p.Age <= number);
+                    return filter.ToList();
+                }
+            }
+            return Enumerable.Empty<Student>();
+        }
+
         public async Task Save(Student student)
         {
-            context.Add(student);
-            await context.SaveChangesAsync();
+            //student.StudentId = Guid.NewGuid();
+            //context.Add(student);
+            context.Students.Add(student);
+            context.SaveChanges();
+            //await context.SaveChangesAsync();
         }
 
         public async Task Update(Guid id, Student student)
@@ -30,8 +92,12 @@ namespace Gestion_Estudiantes.Services
             var actualStudent = context.Students.Find(id);
             if (actualStudent != null)
             {
+                actualStudent.CourseId = student.CourseId;
                 actualStudent.Name = student.Name;
-                await context.SaveChangesAsync();
+                actualStudent.Age = student.Age;
+                context.Update(actualStudent);
+                context.SaveChanges();
+                //await context.SaveChangesAsync();
             }
             await context.SaveChangesAsync();
         }
@@ -41,16 +107,17 @@ namespace Gestion_Estudiantes.Services
             if (actualStudent != null)
             {
                 context.Remove(actualStudent);
-                await context.SaveChangesAsync();
-            }
-
-            await context.SaveChangesAsync();
+                context.SaveChanges();
+                //await context.SaveChangesAsync();
+            }            
         }
     }
 
     public interface IStudentServices
     {
         public IEnumerable<Student> Get();
+        public IEnumerable<Student> StudentIdFilter(Guid id);
+        public IEnumerable<Student> GetStudentAgeContiditions(string condition);
         public Task Save(Student student);
         public Task Update(Guid id, Student student);
         public Task Delete(Guid id);

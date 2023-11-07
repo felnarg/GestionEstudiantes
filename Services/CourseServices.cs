@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using webapi;
 using webapi.Models;
 
@@ -8,45 +7,47 @@ namespace Gestion_Estudiantes.Services
 {
     public class CourseServices : ICourseServices
     {
-        StudentsContext context;
+        protected readonly StudentsContext context;
 
         public CourseServices(StudentsContext dbcontext)
         {
             context = dbcontext;
         }
+        
         public IEnumerable<Course> Get()
         {
             return context.Courses;
         }
-
+        
         public async Task Save(Course course)
         {
+            //course.CourseId = Guid.NewGuid();
             context.Add(course);
-            await context.SaveChangesAsync();
+            context.SaveChanges();
+            //await context.SaveChangesAsync();
         }
-
         public async Task Update(Guid id, Course course)
         {
             var actualCourse = context.Courses.Find(id);
             if (actualCourse!=null)
             {
                 actualCourse.Name = course.Name;
-                
-                await context.SaveChangesAsync();
-            }
-                
-            await context.SaveChangesAsync();
+                //context.Attach(actualCourse);
+                context.Update(actualCourse);
+                context.SaveChanges();
+                //await context.SaveChangesAsync();
+            }            
         }
+        
         public async Task Delete(Guid id)
         {
             var actualCourse = context.Courses.Find(id);
             if (actualCourse != null)
-            {
+            {   
                 context.Remove(actualCourse);
-                await context.SaveChangesAsync();
+                context.SaveChanges();
+                //await context.SaveChangesAsync();
             }
-
-            await context.SaveChangesAsync();
         }
     }
 

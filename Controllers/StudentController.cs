@@ -7,7 +7,7 @@ namespace Gestion_Estudiantes.Controllers
     [Route("[controller]")]
     public class StudentController : ControllerBase
     {
-        private readonly IStudentServices _studentService;
+        IStudentServices _studentService;
 
         public StudentController(IStudentServices studentService)
         {
@@ -18,6 +18,16 @@ namespace Gestion_Estudiantes.Controllers
         public IActionResult Get()
         {
             return Ok(_studentService.Get());
+        }
+        [HttpGet("studentid/{id}")]
+        public IActionResult GetStudentIdFilter(Guid id)
+        {
+            return Ok(_studentService.StudentIdFilter(id));
+        }
+        [HttpGet("studentage/{condition}")]
+        public IActionResult GetStudentAgeContiditions(string condition)
+        {
+            return Ok(_studentService.GetStudentAgeContiditions(condition));
         }
 
         [HttpPost]

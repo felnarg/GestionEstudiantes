@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webapi;
 
@@ -11,9 +12,11 @@ using webapi;
 namespace Gestion_Estudiantes.Migrations
 {
     [DbContext(typeof(StudentsContext))]
-    partial class StudentsContextModelSnapshot : ModelSnapshot
+    [Migration("20231106231851_InitialCreateAgeInt")]
+    partial class InitialCreateAgeInt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,13 +39,6 @@ namespace Gestion_Estudiantes.Migrations
                     b.HasKey("CourseId");
 
                     b.ToTable("Course", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            CourseId = new Guid("22f973e1-f297-4884-b522-2540b44750f5"),
-                            Name = "sexto"
-                        });
                 });
 
             modelBuilder.Entity("webapi.Models.Student", b =>
@@ -67,15 +63,6 @@ namespace Gestion_Estudiantes.Migrations
                     b.HasIndex("CourseId");
 
                     b.ToTable("Student", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            StudentId = new Guid("22f973e1-f297-4884-b522-2540b44750f4"),
-                            Age = 10,
-                            CourseId = new Guid("22f973e1-f297-4884-b522-2540b44750f5"),
-                            Name = "William lasso"
-                        });
                 });
 
             modelBuilder.Entity("webapi.Models.Student", b =>
