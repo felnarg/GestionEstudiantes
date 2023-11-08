@@ -32,10 +32,8 @@ namespace Gestion_Estudiantes.Services
             if (actualCourse!=null)
             {
                 actualCourse.Name = course.Name;
-                //context.Attach(actualCourse);
                 context.Update(actualCourse);
                 context.SaveChanges();
-                //await context.SaveChangesAsync();
             }            
         }
         
@@ -46,7 +44,6 @@ namespace Gestion_Estudiantes.Services
             {   
                 context.Remove(actualCourse);
                 context.SaveChanges();
-                //await context.SaveChangesAsync();
             }
         }
     }
