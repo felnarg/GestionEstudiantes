@@ -23,6 +23,9 @@ namespace Gestion_Estudiantes.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Course course)
         {
+            if (course.Name == null || course.Name == "")
+                return BadRequest("La propiedad nombre no puede ser nula o vacia");
+
             _courseServices.Save(course);
             return Ok();
         }
@@ -30,10 +33,9 @@ namespace Gestion_Estudiantes.Controllers
         [HttpPut("{id}")]
         public IActionResult Put([FromRoute] Guid id,[FromBody] Course course)
         {
-            if (course.Name == null)
-            {
-                return BadRequest("La propiedad nombre no puede ser nula");
-            }
+            if (course.Name == null || course.Name == "")
+                return BadRequest("La propiedad nombre no puede ser nula o vacia");
+
             _courseServices.Update(id, course);
             return Ok();
         }
