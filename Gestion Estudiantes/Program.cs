@@ -1,7 +1,8 @@
-using Gestion_Estudiantes.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using webapi;
+using Infrastructure.DbStudentContext;
+using Application.CommandHandlers;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

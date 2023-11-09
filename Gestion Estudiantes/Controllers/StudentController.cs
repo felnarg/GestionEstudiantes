@@ -1,6 +1,5 @@
-﻿using Gestion_Estudiantes.Services;
-using Microsoft.AspNetCore.Mvc;
-using webapi.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using Domain.Models;
 
 namespace Gestion_Estudiantes.Controllers
 {
