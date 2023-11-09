@@ -1,0 +1,3 @@
+string de conexion a base de datos
+
+"Data Source=FELIPEDELL\\SQLEXPRESS;Initial Catalog=GestorEstudiantes;User ID=sa;Password=3045;Encrypt=True;TrustServerCertificate=True;"
