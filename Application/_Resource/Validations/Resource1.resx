@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CorrectField" xml:space="preserve">
-    <value>"El cuerpo del request es valido"</value>
+  <data name="DailyClass" xml:space="preserve">
+    <value>"El estudiante {0} estudia los días Lunes, Martes, Miercoles y Viernes"</value>
+  </data>
+  <data name="DailyClassNight" xml:space="preserve">
+    <value>"El estudiante {0} estudia los días Viernes y Sábados"</value>
+  </data>
+  <data name="DailyTypeMorning" xml:space="preserve">
+    <value>"(Horario diurno)"</value>
+  </data>
+  <data name="DailyTypeNight" xml:space="preserve">
+    <value>"(Horario nocturno)"</value>
   </data>
   <data name="FieldVerify" xml:space="preserve">
     <value>"El campo {0} es requerido"</value>

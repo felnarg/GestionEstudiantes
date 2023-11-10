@@ -7,7 +7,7 @@ using Domain.Models;
 
 namespace Application._Resource.Validations
 {
-    public interface Validations
+    public static class Validations
     {
         public static void FieldValidation(string propertie, string field)
         {

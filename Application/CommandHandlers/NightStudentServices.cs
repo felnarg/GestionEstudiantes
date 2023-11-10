@@ -1,12 +1,13 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 using Application._Resource.Validations;
+using Application.Interfaces;
 using Domain.Models;
 using Infrastructure.DbStudentContext;
 
 namespace Application.CommandHandlers
 {
-    public class NightStudentServices : INightStudentServices
+    public class NightStudentServices : INightStudentServices, IDailyClass
     {
         protected readonly StudentsContext context;
 
@@ -46,6 +47,13 @@ namespace Application.CommandHandlers
                 context.Remove(actualNightStudent);
                 context.SaveChanges();
             }
+        }
+        public string GetDailyClass(Guid id)
+        {
+            var actualStudent = context.NightStudents.Find(id);
+            var typeStudent = actualStudent.Name;
+            var message = Resource1.DailyTypeNight;
+            return string.Format(Resource1.DailyClassNight, $"{typeStudent} {message}");
         }
     }
 }

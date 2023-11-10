@@ -61,11 +61,38 @@ namespace Application._Resource.Validations {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a &quot;El cuerpo del request es valido&quot;.
+        ///   Busca una cadena traducida similar a &quot;El estudiante {0} estudia los días Lunes, Martes, Miercoles y Viernes&quot;.
         /// </summary>
-        internal static string CorrectField {
+        internal static string DailyClass {
             get {
-                return ResourceManager.GetString("CorrectField", resourceCulture);
+                return ResourceManager.GetString("DailyClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a &quot;El estudiante {0} estudia los días Viernes y Sábados&quot;.
+        /// </summary>
+        internal static string DailyClassNight {
+            get {
+                return ResourceManager.GetString("DailyClassNight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a &quot;(Horario diurno)&quot;.
+        /// </summary>
+        internal static string DailyTypeMorning {
+            get {
+                return ResourceManager.GetString("DailyTypeMorning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a &quot;(Horario nocturno)&quot;.
+        /// </summary>
+        internal static string DailyTypeNight {
+            get {
+                return ResourceManager.GetString("DailyTypeNight", resourceCulture);
             }
         }
         
