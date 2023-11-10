@@ -7,14 +7,14 @@ using Domain.Models;
 
 namespace Application._Resource.Validations
 {
-    public class Validations
+    public interface Validations
     {
-        public static void FieldValidation(Course field)
+        public static void FieldCourseValidation(string propertie, string field)
         {
-            if (field == null || field.Name == "")
+            if (field == null || field == "")
             {   
-                throw new Exception(string.Format(Resource1.FieldVerify, nameof(field.Name)));
+                throw new Exception(string.Format(Resource1.FieldVerify, propertie));
             }            
-        }             
+        }
     }
 }

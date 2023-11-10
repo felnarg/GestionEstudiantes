@@ -45,31 +45,16 @@ namespace Application.CommandHandlers
                 string keyword = parts[0].ToString();
                 if (int.TryParse(parts[1], out int number))
                 {
-                    if (keyword == "igual")
-                    {
-                        var filter = context.Students.Where(p => p.Age == number);
-                        return filter.ToList();
-                    }
-                    if (keyword == "mayor")
-                    {
-                        var filter = context.Students.Where(p => p.Age > number);
-                        return filter.ToList();
-                    }
-                    if (keyword == "menor")
-                    {
-                        var filter = context.Students.Where(p => p.Age < number);
-                        return filter.ToList();
-                    }
-                    if (keyword == "mayoroigual")
-                    {
-                        var filter = context.Students.Where(p => p.Age >= number);
-                        return filter.ToList();
-                    }
-                    if (keyword == "menoroigual")
-                    {
-                        var filter = context.Students.Where(p => p.Age <= number);
-                        return filter.ToList();
-                    }
+                    if (keyword == "igual"){var filter = context.Students.Where(p => p.Age == number);
+                        return filter.ToList();}
+                    if (keyword == "mayor"){var filter = context.Students.Where(p => p.Age > number);
+                        return filter.ToList();}
+                    if (keyword == "menor"){var filter = context.Students.Where(p => p.Age < number);
+                        return filter.ToList();}
+                    if (keyword == "mayoroigual"){var filter = context.Students.Where(p => p.Age >= number);
+                        return filter.ToList();}
+                    if (keyword == "menoroigual"){var filter = context.Students.Where(p => p.Age <= number);
+                        return filter.ToList();}
                 }
             }
             return Enumerable.Empty<Student>();
