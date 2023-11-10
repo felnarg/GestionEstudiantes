@@ -5,7 +5,7 @@ namespace Domain.Models;
 
 public class NightStudent
 {
-    public Guid StudentId { get; set; }
+    public Guid NightStudentId { get; set; }
     public Guid CourseId { get; set; }
     public string? Name { get; set; }
     public int Age { get; set; }
