@@ -3,12 +3,12 @@ using System.Text.Json.Serialization;
 
 namespace Domain.Models;
 
-public class Course
+public class NightStudent
 {
+    public Guid StudentId { get; set; }
     public Guid CourseId { get; set; }
     public string? Name { get; set; }
-
+    public int Age { get; set; }
     [JsonIgnore]
-    public virtual ICollection<Student>? Student { get; set; }
-    public virtual ICollection<NightStudent>? NightStudent { get; set; }
+    public virtual Course? Course { get; set; }
 }
