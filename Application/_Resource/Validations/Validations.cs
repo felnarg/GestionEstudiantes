@@ -9,11 +9,11 @@ namespace Application._Resource.Validations
 {
     public class Validations
     {
-        public static void FieldValidation(string field)
+        public static void FieldValidation(Course field)
         {
-            if (field == null || field == "")
-            {         
-                throw new Exception(string.Format(Resource1.FieldVerify, field));
+            if (field == null || field.Name == "")
+            {   
+                throw new Exception(string.Format(Resource1.FieldVerify, nameof(field.Name)));
             }            
         }             
     }

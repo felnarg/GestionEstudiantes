@@ -22,8 +22,7 @@ namespace Application.CommandHandlers
 
         public async Task Save(Course course)
         {
-            //course.CourseId = Guid.NewGuid();
-            Validations.FieldValidation(course.Name);
+            //course.CourseId = Guid.NewGuid();            
             context.Add(course);
             context.SaveChanges();
             //await context.SaveChangesAsync();

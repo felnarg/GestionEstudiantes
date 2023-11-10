@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Domain.Models;
+using Application._Resource.Validations;
 
 namespace Gestion_Estudiantes.Controllers
 {
@@ -21,6 +22,7 @@ namespace Gestion_Estudiantes.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Course course)
         {
+            Validations.FieldValidation(course);
             _courseServices.Save(course);
             return Ok();
         }
