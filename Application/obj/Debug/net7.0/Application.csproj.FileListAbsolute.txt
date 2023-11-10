@@ -15,3 +15,5 @@ G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Applicat
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\obj\Debug\net7.0\refint\Application.dll
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\obj\Debug\net7.0\Application.pdb
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\obj\Debug\net7.0\ref\Application.dll
+G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\obj\Debug\net7.0\Application._Resource.Validations.Resource1.resources
+G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\obj\Debug\net7.0\Application.csproj.GenerateResource.cache

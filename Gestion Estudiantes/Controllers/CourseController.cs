@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Domain.Models;
+using Application._Resource.Validations;
 
 namespace Gestion_Estudiantes.Controllers
 {
     [Route("[controller]")]
     public class CourseController : ControllerBase
     {
-        ICourseServices _courseServices;
+        private readonly ICourseServices _courseServices;
 
         public CourseController(ICourseServices courseServices)
         {
@@ -21,9 +22,7 @@ namespace Gestion_Estudiantes.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Course course)
         {
-            if (course.Name == null || course.Name == "")
-                return BadRequest("La propiedad nombre no puede ser nula o vacia");
-
+            Validations.FieldValidation(course);
             _courseServices.Save(course);
             return Ok();
         }

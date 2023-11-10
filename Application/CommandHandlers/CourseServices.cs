@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+using Application._Resource.Validations;
 using Domain.Models;
 using Infrastructure.DbStudentContext;
 
@@ -20,7 +22,7 @@ namespace Application.CommandHandlers
 
         public async Task Save(Course course)
         {
-            //course.CourseId = Guid.NewGuid();
+            //course.CourseId = Guid.NewGuid();            
             context.Add(course);
             context.SaveChanges();
             //await context.SaveChangesAsync();
