@@ -22,7 +22,7 @@ namespace Gestion_Estudiantes.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Course course)
         {
-            Validations.FieldCourseValidation(nameof(course.Name), course.Name);
+            Validations.FieldValidation(nameof(course.Name), course.Name);
             _courseServices.Save(course);
             return Ok();
         }

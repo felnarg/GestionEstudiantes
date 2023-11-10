@@ -9,7 +9,7 @@ namespace Application._Resource.Validations
 {
     public interface Validations
     {
-        public static void FieldCourseValidation(string propertie, string field)
+        public static void FieldValidation(string propertie, string field)
         {
             if (field == null || field == "")
             {   

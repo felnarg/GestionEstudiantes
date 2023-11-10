@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSqlServer<StudentsContext>(builder.Configuration.GetConnectionString("dbstudent"));
 builder.Services.AddScoped<ICourseServices, CourseServices>();
 builder.Services.AddScoped<IStudentServices, StudentServices>();
+builder.Services.AddScoped<INightStudentServices, NightStudentServices>();
 
 var app = builder.Build();
 
