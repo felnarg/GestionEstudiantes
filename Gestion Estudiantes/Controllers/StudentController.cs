@@ -6,7 +6,7 @@ namespace Gestion_Estudiantes.Controllers
     [Route("[controller]")]
     public class StudentController : ControllerBase
     {
-        IStudentServices _studentService;
+        private readonly IStudentServices _studentService;
 
         public StudentController(IStudentServices studentService)
         {
