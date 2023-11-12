@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Application._Resource.Validations {
+namespace Gestion_Estudiantes.Controllers {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Application._Resource.Validations {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resource1 {
+    internal class Resource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resource1() {
+        internal Resource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Application._Resource.Validations {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Application._Resource.Validations.Resource1", typeof(Resource1).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Gestion_Estudiantes.Controllers.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,9 +63,9 @@ namespace Application._Resource.Validations {
         /// <summary>
         ///   Busca una cadena traducida similar a &quot;El estudiante {0} estudia los días Lunes, Martes, Miercoles, Jueves y Viernes&quot;.
         /// </summary>
-        internal static string DailyClass {
+        internal static string DailyClassDay {
             get {
-                return ResourceManager.GetString("DailyClass", resourceCulture);
+                return ResourceManager.GetString("DailyClassDay", resourceCulture);
             }
         }
         
@@ -93,6 +93,15 @@ namespace Application._Resource.Validations {
         internal static string DailyTypeNight {
             get {
                 return ResourceManager.GetString("DailyTypeNight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a &quot;El Id ingresado ya existe en la base de datos&quot;.
+        /// </summary>
+        internal static string DuplicateKey {
+            get {
+                return ResourceManager.GetString("DuplicateKey", resourceCulture);
             }
         }
         

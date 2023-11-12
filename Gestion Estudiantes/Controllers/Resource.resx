@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DailyClass" xml:space="preserve">
+  <data name="DailyClassDay" xml:space="preserve">
     <value>"El estudiante {0} estudia los días Lunes, Martes, Miercoles, Jueves y Viernes"</value>
   </data>
   <data name="DailyClassNight" xml:space="preserve">
@@ -128,6 +128,9 @@
   </data>
   <data name="DailyTypeNight" xml:space="preserve">
     <value>"(Horario nocturno)"</value>
+  </data>
+  <data name="DuplicateKey" xml:space="preserve">
+    <value>"El Id ingresado ya existe en la base de datos"</value>
   </data>
   <data name="FieldVerify" xml:space="preserve">
     <value>"El campo {0} es requerido"</value>
