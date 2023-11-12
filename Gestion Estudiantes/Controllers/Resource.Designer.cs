@@ -97,6 +97,15 @@ namespace Gestion_Estudiantes.Controllers {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a &quot;El Id ingresado ya existe en la base de datos&quot;.
+        /// </summary>
+        internal static string DuplicateKey {
+            get {
+                return ResourceManager.GetString("DuplicateKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a &quot;El campo {0} es requerido&quot;.
         /// </summary>
         internal static string FieldVerify {

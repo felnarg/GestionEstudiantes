@@ -129,6 +129,9 @@
   <data name="DailyTypeNight" xml:space="preserve">
     <value>"(Horario nocturno)"</value>
   </data>
+  <data name="DuplicateKey" xml:space="preserve">
+    <value>"El Id ingresado ya existe en la base de datos"</value>
+  </data>
   <data name="FieldVerify" xml:space="preserve">
     <value>"El campo {0} es requerido"</value>
   </data>

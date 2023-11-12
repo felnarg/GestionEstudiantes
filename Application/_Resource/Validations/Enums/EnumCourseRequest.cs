@@ -12,7 +12,8 @@ namespace Application._Resource.Validations.Enums
         {
             correct,
             badIdCourse,
-            badName
+            badName,
+            duplicateIdKey
         }
     }
 }

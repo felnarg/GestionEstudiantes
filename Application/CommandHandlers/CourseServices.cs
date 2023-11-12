@@ -5,6 +5,7 @@ using Application._Resource.Validations.Enums;
 using Azure.Core;
 using Domain.Models;
     using Infrastructure.DbStudentContext;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Application.CommandHandlers
@@ -23,15 +24,18 @@ namespace Application.CommandHandlers
                 return context.Courses;
             }
 
-            public bool Save(Course course)
+            public EnumCourseRequest.Posibilities Save(Course course)
             {
-                if (course.Name!.ToString().IsNullOrEmpty())                
-                    return false;                                   
+                var actualCourse = context.Courses.Find(course.CourseId);
+                if (actualCourse != null)
+                    return EnumCourseRequest.Posibilities.duplicateIdKey;
+                if (course.Name!.IsNullOrEmpty())                
+                    return EnumCourseRequest.Posibilities.badName;                                   
                 else
                 {
                     context.Add(course);
                     context.SaveChanges();
-                    return true;
+                    return EnumCourseRequest.Posibilities.correct;
                 }
                            
             }

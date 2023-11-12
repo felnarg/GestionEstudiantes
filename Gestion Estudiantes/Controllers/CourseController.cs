@@ -25,10 +25,12 @@ namespace Gestion_Estudiantes.Controllers
         public IActionResult Post([FromBody] Course course)
         {
             var validation = _courseServices.Save(course);
-            if (validation)                            
-                return Ok(Resource.OkSave);            
-            else
-                return BadRequest(string.Format(Resource.FieldVerify,Constants.NAME));               
+            if (validation == EnumCourseRequest.Posibilities.correct)                            
+                return Ok(Resource.OkSave);
+            else if (validation == EnumCourseRequest.Posibilities.badName)
+                return BadRequest(string.Format(Resource.FieldVerify, Constants.NAME));
+            else 
+                return BadRequest(Resource.DuplicateKey);
         }
         
         [HttpPut("{id}")]
