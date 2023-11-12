@@ -8,9 +8,9 @@ namespace Gestion_Estudiantes.Controllers
     [Route("[controller]")]
     public class NightStudentController : ControllerBase
     {
-        private readonly INightStudentServices _nightStudentServices;
+        private readonly IRepository<NightStudent> _nightStudentServices;
 
-        public NightStudentController(INightStudentServices nightStudentServices)
+        public NightStudentController(IRepository<NightStudent> nightStudentServices)
         {
             _nightStudentServices = nightStudentServices;
         }

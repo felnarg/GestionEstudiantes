@@ -7,7 +7,7 @@ using Infrastructure.DbStudentContext;
 
 namespace Application.CommandHandlers
 {
-    public class NightStudentServices : INightStudentServices
+    public class NightStudentServices : IRepository<NightStudent>
     {
         protected readonly StudentsContext context;
 

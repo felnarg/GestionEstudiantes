@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Application.CommandHandlers
 {
-    public class StudentServices : IStudentServices
+    public class StudentServices : IStudentServices, IRepository<Student>
     {
         protected readonly StudentsContext context;
 

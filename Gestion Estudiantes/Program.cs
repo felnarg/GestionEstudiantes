@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Infrastructure.DbStudentContext;
 using Application.CommandHandlers;
 using Application.Interfaces;
+using Domain.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSqlServer<StudentsContext>(builder.Configuration.GetConnectionString("dbstudent"));
 builder.Services.AddScoped<ICourseServices, CourseServices>();
 builder.Services.AddScoped<IStudentServices, StudentServices>();
-builder.Services.AddScoped<INightStudentServices, NightStudentServices>();
+builder.Services.AddScoped<IRepository<NightStudent>, NightStudentServices>();
+builder.Services.AddScoped<IRepository<Student>, StudentServices>();
 
 var app = builder.Build();
 
