@@ -10,4 +10,6 @@ public class Course
 
     [JsonIgnore]
     public virtual ICollection<Student>? Student { get; set; }
+    [JsonIgnore]
+    public virtual ICollection<NightStudent>? NightStudent { get; set; }
 }
