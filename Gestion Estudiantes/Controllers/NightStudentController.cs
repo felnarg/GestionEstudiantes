@@ -23,7 +23,6 @@ namespace Gestion_Estudiantes.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] NightStudent nightStudent)
         {
-            Validations.FieldValidation(nameof(nightStudent.Name), nightStudent.Name);
             _nightStudentServices.Save(nightStudent);
             return Ok();
         }
@@ -31,9 +30,6 @@ namespace Gestion_Estudiantes.Controllers
         [HttpPut("{id}")]
         public IActionResult Put([FromRoute] Guid id, [FromBody] NightStudent nightStudent)
         {
-            if (nightStudent.Name == null || nightStudent.Name == "")
-                return BadRequest("La propiedad nombre no puede ser nula o vacia");
-
             _nightStudentServices.Update(id, nightStudent);
             return Ok();
         }

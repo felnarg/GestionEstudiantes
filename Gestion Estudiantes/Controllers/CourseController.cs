@@ -47,7 +47,7 @@ namespace Gestion_Estudiantes.Controllers
         {            
             var validation = _courseServices.Delete(id);
             if (validation)
-                return Ok();
+                return Ok(Resource.OkRemove);
             else
                 return BadRequest(Resource.IdNotFound);
         }
