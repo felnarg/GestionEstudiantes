@@ -52,5 +52,15 @@ namespace Gestion_Estudiantes.Controllers
             _studentRepository.Delete(id);
             return Ok();
         }
+
+        [HttpGet("studentmorning/{id}")]
+        public IActionResult GetDailyStudentMorning(Guid id) 
+        {
+            var validation = _studentRepository.GetDailyStudent(id);
+            if (validation == Resource.IdNotFound)
+                return BadRequest(validation);
+            else
+                return Ok(validation);
+        }
     }
 }

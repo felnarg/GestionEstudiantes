@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DailyClass" xml:space="preserve">
-    <value>"El estudiante {0} estudia los días Lunes, Martes, Miercoles y Viernes"</value>
+    <value>"El estudiante {0} estudia los días Lunes, Martes, Miercoles, Jueves y Viernes"</value>
   </data>
   <data name="DailyClassNight" xml:space="preserve">
     <value>"El estudiante {0} estudia los días Viernes y Sábados"</value>

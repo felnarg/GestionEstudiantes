@@ -94,5 +94,16 @@ namespace Application.CommandHandlers
                 context.SaveChanges();
             }
         }
+        public string GetDailyStudent(Guid id)
+        {
+            var actualStudent = context.Students.Find(id);
+            if ( actualStudent != null)
+            {
+                return string.Format(Resource1.DailyClass, actualStudent.Name);
+            }
+            else
+                return Resource1.IdNotFound;
+        }
+
     }    
 }

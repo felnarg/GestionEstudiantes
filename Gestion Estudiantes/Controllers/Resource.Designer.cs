@@ -61,11 +61,11 @@ namespace Gestion_Estudiantes.Controllers {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a &quot;El estudiante {0} estudia los días Lunes, Martes, Miercoles y Viernes&quot;.
+        ///   Busca una cadena traducida similar a &quot;El estudiante {0} estudia los días Lunes, Martes, Miercoles, Jueves y Viernes&quot;.
         /// </summary>
-        internal static string DailyClass {
+        internal static string DailyClassDay {
             get {
-                return ResourceManager.GetString("DailyClass", resourceCulture);
+                return ResourceManager.GetString("DailyClassDay", resourceCulture);
             }
         }
         
