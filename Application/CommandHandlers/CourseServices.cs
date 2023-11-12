@@ -1,10 +1,13 @@
 ﻿
     using System.ComponentModel.DataAnnotations;
     using Application._Resource.Validations;
-    using Domain.Models;
+using Application._Resource.Validations.Enums;
+using Azure.Core;
+using Domain.Models;
     using Infrastructure.DbStudentContext;
+using Microsoft.IdentityModel.Tokens;
 
-    namespace Application.CommandHandlers
+namespace Application.CommandHandlers
     {
         public class CourseServices : ICourseServices
         {
@@ -20,32 +23,47 @@
                 return context.Courses;
             }
 
-            public async Task Save(Course course)
+            public bool Save(Course course)
             {
-                //course.CourseId = Guid.NewGuid();            
-                context.Add(course);
-                context.SaveChanges();
-                //await context.SaveChangesAsync();
+                if (course.Name!.ToString().IsNullOrEmpty())                
+                    return false;                                   
+                else
+                {
+                    context.Add(course);
+                    context.SaveChanges();
+                    return true;
+                }
+                           
             }
-            public async Task Update(Guid id, Course course)
+            public EnumCourseRequest.Posibilities Update(Guid id, Course course)
             {
+                var validation = Validations.FieldValidation(course.Name!);
+                if (!validation)
+                    return EnumCourseRequest.Posibilities.badName;
+
                 var actualCourse = context.Courses.Find(id);
                 if (actualCourse != null)
                 {
                     actualCourse.Name = course.Name;
                     context.Update(actualCourse);
                     context.SaveChanges();
+                    return EnumCourseRequest.Posibilities.correct;
                 }
+                else
+                    return EnumCourseRequest.Posibilities.badIdCourse;
             }
 
-            public async Task Delete(Guid id)
+            public bool Delete(Guid id)
             {
                 var actualCourse = context.Courses.Find(id);
-                if (actualCourse != null)
-                {
-                    context.Remove(actualCourse);
-                    context.SaveChanges();
-                }
+            if (actualCourse != null)
+            {
+                context.Remove(actualCourse);
+                context.SaveChanges();
+                return true;
+            }
+            else
+                return false;
             }
         }
     }
