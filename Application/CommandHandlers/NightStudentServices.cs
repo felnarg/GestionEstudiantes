@@ -50,10 +50,10 @@ namespace Application.CommandHandlers
         }
         public string GetDailyStudent(Guid id)
         {
-            var actualStudent = context.Students.Find(id);
+            var actualStudent = context.NightStudents.Find(id);
             if (actualStudent != null)
             {
-                return string.Format(Resource1.DailyClass, actualStudent.Name);
+                return string.Format(Resource1.DailyClassNight, actualStudent.Name);
             }
             else
                 return Resource1.IdNotFound;
