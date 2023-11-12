@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 /Gestion Estudiantes.sln
 /Application/obj/Debug/net7.0/Application.csproj.AssemblyReference.cache
+/Infrastructure/obj/Debug/net7.0/Infrastructure.csproj.AssemblyReference.cache

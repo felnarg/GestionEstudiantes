@@ -1,9 +1,13 @@
 ﻿
+using Application._Resource.Validations;
+using Application.Interfaces;
 using Domain.Models;
 using Infrastructure.DbStudentContext;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
 namespace Application.CommandHandlers
 {
-    public class StudentServices : IStudentServices
+    public class StudentServices : IStudentServices, IRepository<Student>
     {
         protected readonly StudentsContext context;
 
@@ -38,38 +42,23 @@ namespace Application.CommandHandlers
         public IEnumerable<Student> GetStudentAgeContiditions(string condition)
         {
             //string request three parts separation =  string/to/number = 0/1/2
-            string[] parts = condition.Split("to", StringSplitOptions.None);
+            string[] parts = condition.Split(Constants.KEY_WORD_AGE_CONDITION_SERVICE, StringSplitOptions.None);
 
             if (parts.Length == 2)
             {
                 string keyword = parts[0].ToString();
                 if (int.TryParse(parts[1], out int number))
                 {
-                    if (keyword == "igual")
-                    {
-                        var filter = context.Students.Where(p => p.Age == number);
-                        return filter.ToList();
-                    }
-                    if (keyword == "mayor")
-                    {
-                        var filter = context.Students.Where(p => p.Age > number);
-                        return filter.ToList();
-                    }
-                    if (keyword == "menor")
-                    {
-                        var filter = context.Students.Where(p => p.Age < number);
-                        return filter.ToList();
-                    }
-                    if (keyword == "mayoroigual")
-                    {
-                        var filter = context.Students.Where(p => p.Age >= number);
-                        return filter.ToList();
-                    }
-                    if (keyword == "menoroigual")
-                    {
-                        var filter = context.Students.Where(p => p.Age <= number);
-                        return filter.ToList();
-                    }
+                    if (keyword == Constants.EQUAL){var filter = context.Students.Where(p => p.Age == number);
+                        return filter.ToList();}
+                    if (keyword == Constants.GREATER){var filter = context.Students.Where(p => p.Age > number);
+                        return filter.ToList();}
+                    if (keyword == Constants.LESS){var filter = context.Students.Where(p => p.Age < number);
+                        return filter.ToList();}
+                    if (keyword == Constants.GREATER_THAN){var filter = context.Students.Where(p => p.Age >= number);
+                        return filter.ToList();}
+                    if (keyword == Constants.LESS_THAN){var filter = context.Students.Where(p => p.Age <= number);
+                        return filter.ToList();}
                 }
             }
             return Enumerable.Empty<Student>();

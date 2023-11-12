@@ -1,9 +1,10 @@
-﻿using Domain.Models;
+﻿using Application._Resource.Validations.Enums;
+using Domain.Models;
 
 public interface ICourseServices
 {
     public IEnumerable<Course> Get();
-    public Task Save(Course course);
-    public Task Update(Guid id, Course course);
-    public Task Delete(Guid id);
+    public bool Save(Course course);
+    public EnumCourseRequest.Posibilities Update(Guid id, Course course);
+    public bool Delete(Guid id);
 }
