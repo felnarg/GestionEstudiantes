@@ -8,12 +8,10 @@ namespace Gestion_Estudiantes.Controllers
     public class StudentController : ControllerBase
     {
         private readonly IStudentServices _studentService;
-        private readonly IDailyClass _dailyClass;
 
-        public StudentController(IStudentServices studentService, IDailyClass dailyClass)
+        public StudentController(IStudentServices studentService)
         {
             _studentService = studentService;
-            _dailyClass = dailyClass;
         }
 
         [HttpGet]
@@ -56,12 +54,6 @@ namespace Gestion_Estudiantes.Controllers
         {
             _studentService.Delete(id);
             return Ok();
-        }
-
-        [HttpGet("dailymorning/{id}")]
-        public IActionResult GetDaily(Guid id)
-        {
-            return Ok(_dailyClass.GetDailyClass(id));
         }
     }
 }

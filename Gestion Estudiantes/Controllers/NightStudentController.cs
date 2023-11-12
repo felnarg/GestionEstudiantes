@@ -9,12 +9,10 @@ namespace Gestion_Estudiantes.Controllers
     public class NightStudentController : ControllerBase
     {
         private readonly INightStudentServices _nightStudentServices;
-        private readonly IDailyClass _dailyClass;
 
-        public NightStudentController(INightStudentServices nightStudentServices, IDailyClass dailyClass)
+        public NightStudentController(INightStudentServices nightStudentServices)
         {
             _nightStudentServices = nightStudentServices;
-            _dailyClass = dailyClass;
         }
         [HttpGet]
         public IActionResult Get()
@@ -44,11 +42,6 @@ namespace Gestion_Estudiantes.Controllers
         {
             _nightStudentServices.Delete(id);
             return Ok();
-        }
-        [HttpGet("dailynight/{id}")]
-        public IActionResult GetDaily(Guid id)
-        {
-            return Ok(_dailyClass.GetDailyClass(id));
         }
     }
 }

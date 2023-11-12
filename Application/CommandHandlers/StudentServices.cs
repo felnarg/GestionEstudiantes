@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Application.CommandHandlers
 {
-    public class StudentServices : IStudentServices, IDailyClass
+    public class StudentServices : IStudentServices
     {
         protected readonly StudentsContext context;
 
@@ -94,14 +94,5 @@ namespace Application.CommandHandlers
                 context.SaveChanges();
             }
         }
-
-        public string GetDailyClass(Guid id)
-        {
-            var actualStudent = context.Students.Find(id);
-            var typeStudent = actualStudent.Name;
-            var message = Resource1.DailyTypeMorning;
-            return string.Format(Resource1.DailyClass, $"{typeStudent} {message}");
-        }
-
     }    
 }

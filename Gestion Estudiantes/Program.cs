@@ -16,8 +16,6 @@ builder.Services.AddSqlServer<StudentsContext>(builder.Configuration.GetConnecti
 builder.Services.AddScoped<ICourseServices, CourseServices>();
 builder.Services.AddScoped<IStudentServices, StudentServices>();
 builder.Services.AddScoped<INightStudentServices, NightStudentServices>();
-builder.Services.AddScoped<IDailyClass, StudentServices>();
-builder.Services.AddScoped<IDailyClass, NightStudentServices>();
 
 var app = builder.Build();
 
