@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Domain.Models;
-using Application._Resource.Validations;
+using Application._Resource;
+using Application.Validations;
 using System.Resources;
-using Application._Resource.Validations.Enums;
+using Application.Validations.Enums;
 
 namespace Gestion_Estudiantes.Controllers
 {
