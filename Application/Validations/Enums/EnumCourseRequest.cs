@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application._Resource.Validations.Enums
+namespace Application.Validations.Enums
 {
     public static class EnumCourseRequest
     {

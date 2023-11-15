@@ -1,4 +1,4 @@
-﻿using Application._Resource.Validations.Enums;
+﻿using Application.Validations.Enums;
 using Domain.Models;
 
 public interface ICourseServices

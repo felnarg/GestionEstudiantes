@@ -1,5 +1,6 @@
 ﻿
-using Application._Resource.Validations;
+using Application._Resource;
+using Application.Validations;
 using Application.Interfaces;
 using Domain.Models;
 using Infrastructure.DbStudentContext;

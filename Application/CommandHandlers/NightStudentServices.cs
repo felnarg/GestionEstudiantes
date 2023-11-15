@@ -1,6 +1,5 @@
 ﻿
-using System.ComponentModel.DataAnnotations;
-using Application._Resource.Validations;
+using Application._Resource;
 using Application.Interfaces;
 using Domain.Models;
 using Infrastructure.DbStudentContext;
