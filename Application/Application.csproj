@@ -16,17 +16,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="_Resource\Validations\Resource1.Designer.cs">
+    <Compile Update="_Resource\Resource1.Designer.cs">
+      <DependentUpon>Resource1.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="_Resource\Validations\Resource1.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+    <EmbeddedResource Update="_Resource\Resource1.resx">
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>
 

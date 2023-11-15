@@ -1,11 +1,9 @@
 ﻿
-    using System.ComponentModel.DataAnnotations;
-    using Application._Resource.Validations;
-using Application._Resource.Validations.Enums;
+using Application.Validations.Enums;
+using Application.Validations;
 using Azure.Core;
 using Domain.Models;
-    using Infrastructure.DbStudentContext;
-using Microsoft.Extensions.DependencyInjection;
+using Infrastructure.DbStudentContext;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Application.CommandHandlers
@@ -41,7 +39,7 @@ namespace Application.CommandHandlers
             }
             public EnumCourseRequest.Posibilities Update(Guid id, Course course)
             {
-                var validation = Validations.FieldValidation(course.Name!);
+                var validation = Validations.Validations.FieldValidation(course.Name!);
                 if (!validation)
                     return EnumCourseRequest.Posibilities.badName;
 
