@@ -5,12 +5,14 @@ using Azure.Core;
 using Domain.Models;
 using Infrastructure.DbStudentContext;
 using Microsoft.IdentityModel.Tokens;
+using Application.Interfaces;
 
 namespace Application.CommandHandlers
+{
+        public class CourseServices : ICourseServices, Infrastructure.Interfaces.IRepository<Course>
     {
-        public class CourseServices : ICourseServices
-        {
             protected readonly StudentsContext context;
+            private readonly Infrastructure.Interfaces.IRepository<Course> courseRepository;
 
             public CourseServices(StudentsContext dbcontext)
             {
@@ -31,8 +33,8 @@ namespace Application.CommandHandlers
                     return EnumCourseRequest.Posibilities.badName;                                   
                 else
                 {
-                    context.Add(course);
-                    context.SaveChanges();
+                    Add(course);
+                    //context.SaveChanges();
                     return EnumCourseRequest.Posibilities.correct;
                 }
                            
@@ -42,13 +44,13 @@ namespace Application.CommandHandlers
                 var validation = Validations.Validations.FieldValidation(course.Name!);
                 if (!validation)
                     return EnumCourseRequest.Posibilities.badName;
-
-                var actualCourse = context.Courses.Find(id);
-                if (actualCourse != null)
+                var DB = GetAll();
+                var actualCourse = DB.FirstOrDefault(p => p.CourseId == id);
+            if (actualCourse != null)
                 {
                     actualCourse.Name = course.Name;
-                    context.Update(actualCourse);
-                    context.SaveChanges();
+                    Update(id, actualCourse);
+                    //courseRepository.SaveChanges();
                     return EnumCourseRequest.Posibilities.correct;
                 }
                 else
@@ -57,15 +59,36 @@ namespace Application.CommandHandlers
 
             public bool Delete(Guid id)
             {
-                var actualCourse = context.Courses.Find(id);
-            if (actualCourse != null)
-            {
-                context.Remove(actualCourse);
-                context.SaveChanges();
-                return true;
+                var condition = false;               
+                condition = Delete(id);
+                return condition;                      
             }
-            else
-                return false;
-            }
+
+        public Course GetById(Guid id)
+        {
+            return courseRepository.GetById(id);
+        }
+
+        public IEnumerable<Course> GetAll()
+        {
+            return courseRepository.GetAll().ToList();
+        }
+
+        public void Add(Course entity)
+        {
+            courseRepository.Add(entity);
+        }
+
+        void Infrastructure.Interfaces.IRepository<Course>.Update(Guid id, Course entity)
+        {
+            courseRepository.Update(id, entity);
+        }
+
+        bool Infrastructure.Interfaces.IRepository<Course>.Delete(Guid id)
+        {
+            var condition = false;
+            condition = courseRepository.Delete(id);
+            return (condition);
         }
     }
+}

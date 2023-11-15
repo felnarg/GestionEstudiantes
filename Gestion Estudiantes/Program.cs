@@ -5,6 +5,7 @@ using Application.CommandHandlers;
 using Application.Interfaces;
 using Domain.Models;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,6 +19,7 @@ builder.Services.AddScoped<ICourseServices, CourseServices>();
 builder.Services.AddScoped<IStudentServices, StudentServices>();
 builder.Services.AddScoped<IRepository<NightStudent>, NightStudentServices>();
 builder.Services.AddScoped<IRepository<Student>, StudentServices>();
+builder.Services.AddScoped<Infrastructure.Interfaces.IRepository<Course>, CourseServices>();
 
 var app = builder.Build();
 
