@@ -4,7 +4,7 @@ using Infrastructure.DbStudentContext;
 using Application.CommandHandlers;
 using Application.Interfaces;
 using Domain.Models;
-
+using Gestion_Estudiantes.DependencyInjections;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,14 +14,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSqlServer<StudentsContext>(builder.Configuration.GetConnectionString("dbstudent"));
-builder.Services.AddScoped<ICourseServices, CourseServices>();
-builder.Services.AddScoped<IStudentServices, StudentServices>();
-builder.Services.AddScoped<IRepository<NightStudent>, NightStudentServices>();
-builder.Services.AddScoped<IRepository<Student>, StudentServices>();
-builder.Services.AddScoped<Infrastructure.Interfaces.IRepository<Course>, StudentRepository<Course>>();
-builder.Services.AddScoped<Infrastructure.Interfaces.IRepository<NightStudent>, StudentRepository<NightStudent>>();
-builder.Services.AddScoped<Infrastructure.Interfaces.IRepository<Student>, StudentRepository<Student>>();
+builder.Inject();
 
 var app = builder.Build();
 
