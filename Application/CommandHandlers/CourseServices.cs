@@ -11,12 +11,12 @@ namespace Application.CommandHandlers
 {
         public class CourseServices : ICourseServices, Infrastructure.Interfaces.IRepository<Course>
     {
-            protected readonly StudentsContext context;
-            private readonly Infrastructure.Interfaces.IRepository<Course> courseRepository;
+            //protected readonly StudentsContext context;
+            private readonly Infrastructure.Interfaces.IRepository<Course> _courseRepository;
 
-            public CourseServices(StudentsContext dbcontext)
+            public CourseServices(Infrastructure.Interfaces.IRepository<Course> courseRepository)
             {
-                context = dbcontext;
+                _courseRepository = courseRepository;
             }
 
             public IEnumerable<Course> Get()
@@ -26,7 +26,8 @@ namespace Application.CommandHandlers
 
             public EnumCourseRequest.Posibilities Save(Course course)
             {
-                var actualCourse = context.Courses.Find(course.CourseId);
+            var DB = GetAll();
+            var actualCourse = DB.FirstOrDefault(p => p.CourseId == course.CourseId);            
                 if (actualCourse != null)
                     return EnumCourseRequest.Posibilities.duplicateIdKey;
                 if (course.Name!.IsNullOrEmpty())                
@@ -34,10 +35,8 @@ namespace Application.CommandHandlers
                 else
                 {
                     Add(course);
-                    //context.SaveChanges();
                     return EnumCourseRequest.Posibilities.correct;
-                }
-                           
+                }                           
             }
             public EnumCourseRequest.Posibilities Update(Guid id, Course course)
             {
@@ -66,28 +65,28 @@ namespace Application.CommandHandlers
 
         public Course GetById(Guid id)
         {
-            return courseRepository.GetById(id);
+            return _courseRepository.GetById(id);
         }
 
         public IEnumerable<Course> GetAll()
         {
-            return courseRepository.GetAll().ToList();
+            return _courseRepository.GetAll().ToList();
         }
 
         public void Add(Course entity)
         {
-            courseRepository.Add(entity);
+            _courseRepository.Add(entity);
         }
 
         void Infrastructure.Interfaces.IRepository<Course>.Update(Guid id, Course entity)
         {
-            courseRepository.Update(id, entity);
+            _courseRepository.Update(id, entity);
         }
 
         bool Infrastructure.Interfaces.IRepository<Course>.Delete(Guid id)
         {
             var condition = false;
-            condition = courseRepository.Delete(id);
+            condition = _courseRepository.Delete(id);
             return (condition);
         }
     }
