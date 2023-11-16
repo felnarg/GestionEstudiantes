@@ -66,37 +66,34 @@ namespace Application.CommandHandlers
 
         public async Task Save(Student student)
         {
-            //student.StudentId = Guid.NewGuid();
-            context.Students.Add(student);
-            context.SaveChanges();
+            Add(student);
         }
 
         public async Task Update(Guid id, Student student)
         {
-            var actualStudent = context.Students.Find(id);
-            if (actualStudent == null)
-                context.SaveChanges();
+            var DB = GetAll();
+            var actualStudent = DB.FirstOrDefault(p => p.StudentId == id);
             if (actualStudent != null)
             {
                 actualStudent.CourseId = student.CourseId;
                 actualStudent.Name = student.Name;
                 actualStudent.Age = student.Age;
-                context.Update(actualStudent);
-                context.SaveChanges();
+                _context.Update(id, actualStudent);
             }
         }
         public async Task Delete(Guid id)
         {
-            var actualStudent = context.Students.Find(id);
+            var DB = GetAll();
+            var actualStudent = DB.FirstOrDefault(p => p.StudentId == id);
             if (actualStudent != null)
             {
-                context.Remove(actualStudent);
-                context.SaveChanges();
+                _context.Delete(id);
             }
         }
         public string GetDailyStudent(Guid id)
         {
-            var actualStudent = context.Students.Find(id);
+            var DB = GetAll();
+            var actualStudent = DB.FirstOrDefault(p => p.StudentId == id);
             if ( actualStudent != null)
             {
                 return string.Format(Resource1.DailyClass, actualStudent.Name);
@@ -107,27 +104,27 @@ namespace Application.CommandHandlers
 
         public Student GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return _context.GetById(id);
         }
 
         public IEnumerable<Student> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.GetAll();
         }
 
         public void Add(Student entity)
         {
-            throw new NotImplementedException();
+            _context.Add(entity);
         }
 
         void Infrastructure.Interfaces.IRepository<Student>.Update(Guid id, Student entity)
         {
-            throw new NotImplementedException();
+            _context.Update(id, entity);
         }
 
         bool Infrastructure.Interfaces.IRepository<Student>.Delete(Guid id)
         {
-            throw new NotImplementedException();
+            return _context.Delete(id);
         }
     }    
 }
