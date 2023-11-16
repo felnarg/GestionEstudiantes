@@ -21,7 +21,7 @@ namespace Application.CommandHandlers
 
             public IEnumerable<Course> Get()
             {
-                return context.Courses;
+                return GetAll();
             }
 
             public EnumCourseRequest.Posibilities Save(Course course)
