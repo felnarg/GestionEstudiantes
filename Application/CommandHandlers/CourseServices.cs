@@ -11,7 +11,6 @@ namespace Application.CommandHandlers
 {
         public class CourseServices : ICourseServices, Infrastructure.Interfaces.IRepository<Course>
     {
-            //protected readonly StudentsContext context;
             private readonly Infrastructure.Interfaces.IRepository<Course> _courseRepository;
 
             public CourseServices(Infrastructure.Interfaces.IRepository<Course> courseRepository)
@@ -48,7 +47,7 @@ namespace Application.CommandHandlers
             if (actualCourse != null)
                 {
                     actualCourse.Name = course.Name;
-                    Update(id, actualCourse);
+                    _courseRepository.Update(id, actualCourse);
                     //courseRepository.SaveChanges();
                     return EnumCourseRequest.Posibilities.correct;
                 }
@@ -59,7 +58,7 @@ namespace Application.CommandHandlers
             public bool Delete(Guid id)
             {
                 var condition = false;               
-                condition = Delete(id);
+                condition = _courseRepository.Delete(id);
                 return condition;                      
             }
 

@@ -20,6 +20,8 @@ builder.Services.AddScoped<IStudentServices, StudentServices>();
 builder.Services.AddScoped<IRepository<NightStudent>, NightStudentServices>();
 builder.Services.AddScoped<IRepository<Student>, StudentServices>();
 builder.Services.AddScoped<Infrastructure.Interfaces.IRepository<Course>, StudentRepository<Course>>();
+builder.Services.AddScoped<Infrastructure.Interfaces.IRepository<NightStudent>, StudentRepository<NightStudent>>();
+builder.Services.AddScoped<Infrastructure.Interfaces.IRepository<Student>, StudentRepository<Student>>();
 
 var app = builder.Build();
 

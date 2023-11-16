@@ -48,7 +48,7 @@ namespace Infrastructure.DbStudentContext
         public void Update(Guid id,T entity)
         {
             var actualEntity = _context.Set<T>().Find(id);
-
+            
             _context.Set<T>().Update(entity);
             _context.SaveChanges();
         }
