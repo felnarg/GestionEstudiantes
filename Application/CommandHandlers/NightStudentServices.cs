@@ -6,56 +6,82 @@ using Infrastructure.DbStudentContext;
 
 namespace Application.CommandHandlers
 {
-    public class NightStudentServices : IRepository<NightStudent>
+    public class NightStudentServices : Application.Interfaces.IRepository<NightStudent>, Infrastructure.Interfaces.IRepository<NightStudent>
     {
-        protected readonly StudentsContext context;
+        //protected readonly StudentsContext context;
+        private readonly Infrastructure.Interfaces.IRepository<NightStudent> _context;
 
-        public NightStudentServices(StudentsContext dbcontext)
+        public NightStudentServices(Infrastructure.Interfaces.IRepository<NightStudent> dbcontext)
         {
-            context = dbcontext;
+            _context = dbcontext;
         }
 
         public IEnumerable<NightStudent> Get()
         {
-            return context.NightStudents;
+            return _context.GetAll();
         }
 
         public async Task Save(NightStudent nightStudent)
-        {
-            //nightStudent.NightStudentId = Guid.NewGuid();            
-            context.Add(nightStudent);
-            context.SaveChanges();
-            //await context.SaveChangesAsync();
+        {       
+            _context.Add(nightStudent);
         }
         public async Task Update(Guid id, NightStudent nightStudent)
         {
-            var actualNightStudent = context.NightStudents.Find(id);
+            var DB = GetAll();
+            var actualNightStudent = DB.FirstOrDefault(p => p.NightStudentId == id);            
             if (actualNightStudent != null)
             {
                 actualNightStudent.Name = nightStudent.Name;
-                context.Update(actualNightStudent);
-                context.SaveChanges();
+                actualNightStudent.CourseId = nightStudent.CourseId;
+                actualNightStudent.Age = nightStudent.Age;
+                _context.Update(id, actualNightStudent);
             }
         }
 
         public async Task Delete(Guid id)
         {
-            var actualNightStudent = context.NightStudents.Find(id);
+            var DB = GetAll();
+            var actualNightStudent = DB.FirstOrDefault(p => p.NightStudentId == id);
             if (actualNightStudent != null)
             {
-                context.Remove(actualNightStudent);
-                context.SaveChanges();
+                _context.Delete(id);
             }
         }
         public string GetDailyStudent(Guid id)
         {
-            var actualStudent = context.NightStudents.Find(id);
-            if (actualStudent != null)
+            var DB = GetAll();
+            var actualNightStudent = DB.FirstOrDefault(p => p.NightStudentId == id);
+            if (actualNightStudent != null)
             {
-                return string.Format(Resource1.DailyClassNight, actualStudent.Name);
+                return string.Format(Resource1.DailyClassNight, actualNightStudent.Name);
             }
             else
                 return Resource1.IdNotFound;
+        }
+
+        public NightStudent GetById(Guid id)
+        {
+            return _context.GetById(id);
+        }
+
+        public IEnumerable<NightStudent> GetAll()
+        {
+            return _context.GetAll();
+        }
+
+        public void Add(NightStudent entity)
+        {
+            _context.Add(entity);
+        }
+
+        void Infrastructure.Interfaces.IRepository<NightStudent>.Update(Guid id, NightStudent entity)
+        {
+            _context.Update(id, entity);
+        }
+
+        bool Infrastructure.Interfaces.IRepository<NightStudent>.Delete(Guid id)
+        {
+            return _context.Delete(id);
         }
     }
 }

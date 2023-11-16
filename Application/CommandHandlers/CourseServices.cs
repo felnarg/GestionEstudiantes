@@ -5,50 +5,50 @@ using Azure.Core;
 using Domain.Models;
 using Infrastructure.DbStudentContext;
 using Microsoft.IdentityModel.Tokens;
+using Application.Interfaces;
 
 namespace Application.CommandHandlers
+{
+        public class CourseServices : ICourseServices, Infrastructure.Interfaces.IRepository<Course>
     {
-        public class CourseServices : ICourseServices
-        {
-            protected readonly StudentsContext context;
+            private readonly Infrastructure.Interfaces.IRepository<Course> _courseRepository;
 
-            public CourseServices(StudentsContext dbcontext)
+            public CourseServices(Infrastructure.Interfaces.IRepository<Course> courseRepository)
             {
-                context = dbcontext;
+                _courseRepository = courseRepository;
             }
 
             public IEnumerable<Course> Get()
             {
-                return context.Courses;
+                return GetAll();
             }
 
             public EnumCourseRequest.Posibilities Save(Course course)
             {
-                var actualCourse = context.Courses.Find(course.CourseId);
+            var DB = GetAll();
+            var actualCourse = DB.FirstOrDefault(p => p.CourseId == course.CourseId);            
                 if (actualCourse != null)
                     return EnumCourseRequest.Posibilities.duplicateIdKey;
                 if (course.Name!.IsNullOrEmpty())                
                     return EnumCourseRequest.Posibilities.badName;                                   
                 else
                 {
-                    context.Add(course);
-                    context.SaveChanges();
+                    Add(course);
                     return EnumCourseRequest.Posibilities.correct;
-                }
-                           
+                }                           
             }
             public EnumCourseRequest.Posibilities Update(Guid id, Course course)
             {
                 var validation = Validations.Validations.FieldValidation(course.Name!);
                 if (!validation)
                     return EnumCourseRequest.Posibilities.badName;
-
-                var actualCourse = context.Courses.Find(id);
-                if (actualCourse != null)
+                var DB = GetAll();
+                var actualCourse = DB.FirstOrDefault(p => p.CourseId == id);
+            if (actualCourse != null)
                 {
                     actualCourse.Name = course.Name;
-                    context.Update(actualCourse);
-                    context.SaveChanges();
+                    _courseRepository.Update(id, actualCourse);
+                    //courseRepository.SaveChanges();
                     return EnumCourseRequest.Posibilities.correct;
                 }
                 else
@@ -57,15 +57,36 @@ namespace Application.CommandHandlers
 
             public bool Delete(Guid id)
             {
-                var actualCourse = context.Courses.Find(id);
-            if (actualCourse != null)
-            {
-                context.Remove(actualCourse);
-                context.SaveChanges();
-                return true;
+                var condition = false;               
+                condition = _courseRepository.Delete(id);
+                return condition;                      
             }
-            else
-                return false;
-            }
+
+        public Course GetById(Guid id)
+        {
+            return _courseRepository.GetById(id);
+        }
+
+        public IEnumerable<Course> GetAll()
+        {
+            return _courseRepository.GetAll().ToList();
+        }
+
+        public void Add(Course entity)
+        {
+            _courseRepository.Add(entity);
+        }
+
+        void Infrastructure.Interfaces.IRepository<Course>.Update(Guid id, Course entity)
+        {
+            _courseRepository.Update(id, entity);
+        }
+
+        bool Infrastructure.Interfaces.IRepository<Course>.Delete(Guid id)
+        {
+            var condition = false;
+            condition = _courseRepository.Delete(id);
+            return (condition);
         }
     }
+}
