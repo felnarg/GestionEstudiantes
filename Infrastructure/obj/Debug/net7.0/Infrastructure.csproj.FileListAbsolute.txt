@@ -1,7 +1,10 @@
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Infrastructure\bin\Debug\net7.0\Infrastructure.deps.json
+G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Infrastructure\bin\Debug\net7.0\Infrastructure.runtimeconfig.json
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Infrastructure\bin\Debug\net7.0\Infrastructure.dll
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Infrastructure\bin\Debug\net7.0\Infrastructure.pdb
+G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Infrastructure\bin\Debug\net7.0\Application.dll
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Infrastructure\bin\Debug\net7.0\Domain.dll
+G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Infrastructure\bin\Debug\net7.0\Application.pdb
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Infrastructure\bin\Debug\net7.0\Domain.pdb
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Infrastructure\obj\Debug\net7.0\Infrastructure.csproj.AssemblyReference.cache
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Infrastructure\obj\Debug\net7.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
@@ -12,4 +15,5 @@ G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Infrastr
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Infrastructure\obj\Debug\net7.0\Infrastructure.dll
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Infrastructure\obj\Debug\net7.0\refint\Infrastructure.dll
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Infrastructure\obj\Debug\net7.0\Infrastructure.pdb
+G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Infrastructure\obj\Debug\net7.0\Infrastructure.genruntimeconfig.cache
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Infrastructure\obj\Debug\net7.0\ref\Infrastructure.dll

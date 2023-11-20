@@ -399,3 +399,6 @@ FodyWeavers.xsd
 /Gestion Estudiantes.sln
 /Application/obj/Debug/net7.0/Application.csproj.AssemblyReference.cache
 /Infrastructure/obj/Debug/net7.0/Infrastructure.csproj.AssemblyReference.cache
+/Application/obj/Debug/net7.0/Application.csproj.AssemblyReference.cache
+/Domain/obj/Debug/net7.0/Domain.AssemblyInfo.cs
+/.gitignore

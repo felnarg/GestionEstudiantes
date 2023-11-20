@@ -1,5 +1,5 @@
 ﻿
-namespace Application._Resource.Validations
+namespace Application._Resource
 {
     public static class Constants
     {

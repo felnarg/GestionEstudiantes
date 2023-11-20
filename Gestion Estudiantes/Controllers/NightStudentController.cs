@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Domain.Models;
-using Application._Resource.Validations;
+using Application.Validations;
 using Application.Interfaces;
 
 namespace Gestion_Estudiantes.Controllers
