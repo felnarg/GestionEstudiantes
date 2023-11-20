@@ -8,57 +8,56 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Application.CommandHandlers
 {
-    public class StudentServices : IStudentServices, IRepository<Student>
+    public class StudentServices : IStudentServices, IRepository<Student>, Infrastructure.Interfaces.IRepository<Student>
     {
-        protected readonly StudentsContext context;
+        private readonly Infrastructure.Interfaces.IRepository<Student> _context;
 
-        public StudentServices(StudentsContext dbcontext)
+        public StudentServices(Infrastructure.Interfaces.IRepository<Student> dbcontext)
         {
-            context = dbcontext;
+            _context = dbcontext;
         }
         public IEnumerable<Student> Get()
         {
-            return context.Students;
+            return GetAll();
         }
 
         public IEnumerable<Student> StudentIdFilter(Guid id)
         {
-            var StudentId = context.Students.Find(id);
-            var CourseId = context.Courses.Find(id);
+            var DB = GetAll();
+            var StudentId = DB.FirstOrDefault(p => p.StudentId == id);
+            var CourseId = DB.FirstOrDefault(p => p.CourseId == id);
             if (StudentId != null && CourseId == null)
             {
-                var filter = context.Students.Where(p => p.StudentId == id);
+                var filter = DB.Where(p => p.StudentId == id);
                 return filter.ToList();
             }
             if (CourseId != null && StudentId == null)
             {
-                var filter = context.Students.Where(p => p.CourseId == id);
+                var filter = DB.Where(p => p.CourseId == id);
                 return filter.ToList();
             }
-            //return NotFound();
             return Enumerable.Empty<Student>();
-            //return context.Students; //revisar como retornar un badrequest
         }
 
         public IEnumerable<Student> GetStudentAgeContiditions(string condition)
         {
             //string request three parts separation =  string/to/number = 0/1/2
             string[] parts = condition.Split(Constants.KEY_WORD_AGE_CONDITION_SERVICE, StringSplitOptions.None);
-
+            var DB = GetAll();
             if (parts.Length == 2)
             {
                 string keyword = parts[0].ToString();
                 if (int.TryParse(parts[1], out int number))
                 {
-                    if (keyword == Constants.EQUAL){var filter = context.Students.Where(p => p.Age == number);
+                    if (keyword == Constants.EQUAL){var filter = DB.Where(p => p.Age == number);
                         return filter.ToList();}
-                    if (keyword == Constants.GREATER){var filter = context.Students.Where(p => p.Age > number);
+                    if (keyword == Constants.GREATER){var filter = DB.Where(p => p.Age > number);
                         return filter.ToList();}
-                    if (keyword == Constants.LESS){var filter = context.Students.Where(p => p.Age < number);
+                    if (keyword == Constants.LESS){var filter = DB.Where(p => p.Age < number);
                         return filter.ToList();}
-                    if (keyword == Constants.GREATER_THAN){var filter = context.Students.Where(p => p.Age >= number);
+                    if (keyword == Constants.GREATER_THAN){var filter = DB.Where(p => p.Age >= number);
                         return filter.ToList();}
-                    if (keyword == Constants.LESS_THAN){var filter = context.Students.Where(p => p.Age <= number);
+                    if (keyword == Constants.LESS_THAN){var filter = DB.Where(p => p.Age <= number);
                         return filter.ToList();}
                 }
             }
@@ -67,37 +66,34 @@ namespace Application.CommandHandlers
 
         public async Task Save(Student student)
         {
-            //student.StudentId = Guid.NewGuid();
-            context.Students.Add(student);
-            context.SaveChanges();
+            Add(student);
         }
 
         public async Task Update(Guid id, Student student)
         {
-            var actualStudent = context.Students.Find(id);
-            if (actualStudent == null)
-                context.SaveChanges();
+            var DB = GetAll();
+            var actualStudent = DB.FirstOrDefault(p => p.StudentId == id);
             if (actualStudent != null)
             {
                 actualStudent.CourseId = student.CourseId;
                 actualStudent.Name = student.Name;
                 actualStudent.Age = student.Age;
-                context.Update(actualStudent);
-                context.SaveChanges();
+                _context.Update(id, actualStudent);
             }
         }
         public async Task Delete(Guid id)
         {
-            var actualStudent = context.Students.Find(id);
+            var DB = GetAll();
+            var actualStudent = DB.FirstOrDefault(p => p.StudentId == id);
             if (actualStudent != null)
             {
-                context.Remove(actualStudent);
-                context.SaveChanges();
+                _context.Delete(id);
             }
         }
         public string GetDailyStudent(Guid id)
         {
-            var actualStudent = context.Students.Find(id);
+            var DB = GetAll();
+            var actualStudent = DB.FirstOrDefault(p => p.StudentId == id);
             if ( actualStudent != null)
             {
                 return string.Format(Resource1.DailyClass, actualStudent.Name);
@@ -106,5 +102,29 @@ namespace Application.CommandHandlers
                 return Resource1.IdNotFound;
         }
 
+        public Student GetById(Guid id)
+        {
+            return _context.GetById(id);
+        }
+
+        public IEnumerable<Student> GetAll()
+        {
+            return _context.GetAll();
+        }
+
+        public void Add(Student entity)
+        {
+            _context.Add(entity);
+        }
+
+        void Infrastructure.Interfaces.IRepository<Student>.Update(Guid id, Student entity)
+        {
+            _context.Update(id, entity);
+        }
+
+        bool Infrastructure.Interfaces.IRepository<Student>.Delete(Guid id)
+        {
+            return _context.Delete(id);
+        }
     }    
 }
