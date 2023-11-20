@@ -1,7 +1,5 @@
 ﻿
 using Application._Resource;
-using Application.Validations;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Application.Validations
 {
@@ -9,7 +7,7 @@ namespace Application.Validations
     {
         public static bool FieldValidation(string field)
         {
-            if (field.IsNullOrEmpty())
+            if (string.IsNullOrEmpty(field))
                 return false;
             else
                 return true;
@@ -17,13 +15,13 @@ namespace Application.Validations
         }
         public static string ClassStudentsFieldsValidations(string studentId, string courseId, string name, string age)
         {
-            if (studentId.IsNullOrEmpty())
+            if (string.IsNullOrEmpty(studentId))
                 return string.Format(Resource1.FieldVerify, Constants.STUDENT_ID);
-            else if (courseId.IsNullOrEmpty())
+            else if (string.IsNullOrEmpty(courseId))
                 return string.Format(Resource1.FieldVerify, Constants.COURSE_ID);
-            else if (name.IsNullOrEmpty())
+            else if (string.IsNullOrEmpty(name))
                 return string.Format(Resource1.FieldVerify, Constants.NAME);
-            else if (age.IsNullOrEmpty())
+            else if (string.IsNullOrEmpty(age))
                 return string.Format(Resource1.FieldVerify, Constants.AGE);
             else
                 return Resource1.Ok;

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Interfaces;
 using Infrastructure.Interfaces;
 
 namespace Infrastructure.DbStudentContext
 {
-    public class StudentRepository<T> : IRepository<T> where T : class
+    public class StudentRepository<T> : IRepository2<T> where T : class
     {
         private readonly StudentsContext _context;
 

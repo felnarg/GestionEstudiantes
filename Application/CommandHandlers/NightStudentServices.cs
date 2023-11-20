@@ -2,16 +2,15 @@
 using Application._Resource;
 using Application.Interfaces;
 using Domain.Models;
-using Infrastructure.DbStudentContext;
 
 namespace Application.CommandHandlers
 {
-    public class NightStudentServices : Application.Interfaces.IRepository<NightStudent>, Infrastructure.Interfaces.IRepository<NightStudent>
+    public class NightStudentServices : Application.Interfaces.IRepository<NightStudent>, IRepository2<NightStudent>
     {
         //protected readonly StudentsContext context;
-        private readonly Infrastructure.Interfaces.IRepository<NightStudent> _context;
+        private readonly IRepository2<NightStudent> _context;
 
-        public NightStudentServices(Infrastructure.Interfaces.IRepository<NightStudent> dbcontext)
+        public NightStudentServices(IRepository2<NightStudent> dbcontext)
         {
             _context = dbcontext;
         }
@@ -74,12 +73,12 @@ namespace Application.CommandHandlers
             _context.Add(entity);
         }
 
-        void Infrastructure.Interfaces.IRepository<NightStudent>.Update(Guid id, NightStudent entity)
+        void IRepository2<NightStudent>.Update(Guid id, NightStudent entity)
         {
             _context.Update(id, entity);
         }
 
-        bool Infrastructure.Interfaces.IRepository<NightStudent>.Delete(Guid id)
+        bool IRepository2<NightStudent>.Delete(Guid id)
         {
             return _context.Delete(id);
         }

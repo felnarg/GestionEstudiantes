@@ -6,14 +6,14 @@ G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Applicat
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\obj\Debug\net7.0\Application.AssemblyInfo.cs
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\obj\Debug\net7.0\Application.csproj.CoreCompileInputs.cache
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\bin\Debug\net7.0\Application.deps.json
+G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\bin\Debug\net7.0\Application.runtimeconfig.json
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\bin\Debug\net7.0\Application.dll
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\bin\Debug\net7.0\Application.pdb
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\bin\Debug\net7.0\Domain.dll
-G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\bin\Debug\net7.0\Infrastructure.dll
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\bin\Debug\net7.0\Domain.pdb
-G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\bin\Debug\net7.0\Infrastructure.pdb
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\obj\Debug\net7.0\Application.csproj.CopyComplete
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\obj\Debug\net7.0\Application.dll
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\obj\Debug\net7.0\refint\Application.dll
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\obj\Debug\net7.0\Application.pdb
+G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\obj\Debug\net7.0\Application.genruntimeconfig.cache
 G:\Mi unidad\Felipe opitech\capacitación c#\primeros pasos\RetoChatGPT\Application\obj\Debug\net7.0\ref\Application.dll

@@ -1,19 +1,14 @@
 ﻿
-using Application.Validations.Enums;
-using Application.Validations;
-using Azure.Core;
-using Domain.Models;
-using Infrastructure.DbStudentContext;
-using Microsoft.IdentityModel.Tokens;
 using Application.Interfaces;
-
+using Application.Validations.Enums;
+using Domain.Models;
 namespace Application.CommandHandlers
 {
-        public class CourseServices : ICourseServices, Infrastructure.Interfaces.IRepository<Course>
+    public class CourseServices : ICourseServices, IRepository2<Course>
     {
-            private readonly Infrastructure.Interfaces.IRepository<Course> _courseRepository;
+            private readonly IRepository2<Course> _courseRepository;
 
-            public CourseServices(Infrastructure.Interfaces.IRepository<Course> courseRepository)
+            public CourseServices(IRepository2<Course> courseRepository)
             {
                 _courseRepository = courseRepository;
             }
@@ -29,7 +24,7 @@ namespace Application.CommandHandlers
             var actualCourse = DB.FirstOrDefault(p => p.CourseId == course.CourseId);            
                 if (actualCourse != null)
                     return EnumCourseRequest.Posibilities.duplicateIdKey;
-                if (course.Name!.IsNullOrEmpty())                
+                if (string.IsNullOrEmpty(course.Name!))                
                     return EnumCourseRequest.Posibilities.badName;                                   
                 else
                 {
@@ -77,12 +72,12 @@ namespace Application.CommandHandlers
             _courseRepository.Add(entity);
         }
 
-        void Infrastructure.Interfaces.IRepository<Course>.Update(Guid id, Course entity)
+        void IRepository2<Course>.Update(Guid id, Course entity)
         {
             _courseRepository.Update(id, entity);
         }
 
-        bool Infrastructure.Interfaces.IRepository<Course>.Delete(Guid id)
+        bool IRepository2<Course>.Delete(Guid id)
         {
             var condition = false;
             condition = _courseRepository.Delete(id);

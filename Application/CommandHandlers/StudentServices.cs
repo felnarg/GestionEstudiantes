@@ -3,16 +3,15 @@ using Application._Resource;
 using Application.Validations;
 using Application.Interfaces;
 using Domain.Models;
-using Infrastructure.DbStudentContext;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Application.CommandHandlers
 {
-    public class StudentServices : IStudentServices, IRepository<Student>, Infrastructure.Interfaces.IRepository<Student>
+    public class StudentServices : IStudentServices, IRepository<Student>, IRepository2<Student>
     {
-        private readonly Infrastructure.Interfaces.IRepository<Student> _context;
+        private readonly IRepository2<Student> _context;
 
-        public StudentServices(Infrastructure.Interfaces.IRepository<Student> dbcontext)
+        public StudentServices(IRepository2<Student> dbcontext)
         {
             _context = dbcontext;
         }
@@ -117,12 +116,12 @@ namespace Application.CommandHandlers
             _context.Add(entity);
         }
 
-        void Infrastructure.Interfaces.IRepository<Student>.Update(Guid id, Student entity)
+        void IRepository2<Student>.Update(Guid id, Student entity)
         {
             _context.Update(id, entity);
         }
 
-        bool Infrastructure.Interfaces.IRepository<Student>.Delete(Guid id)
+        bool IRepository2<Student>.Delete(Guid id)
         {
             return _context.Delete(id);
         }
